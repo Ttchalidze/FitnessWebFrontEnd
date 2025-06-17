@@ -1,0 +1,20 @@
+/* src/styles/dashboard.css */
+
+.dashboard h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.workout-list {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.workout-item {
+  padding: 2rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}

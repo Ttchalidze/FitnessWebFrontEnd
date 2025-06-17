@@ -1,0 +1,27 @@
+/* src/styles/workouts.css */
+
+.workouts h1 {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.muscle-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.muscle-card {
+  padding: 2rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.muscle-card a {
+  margin-top: 1rem;
+  display: inline-block;
+  color: var(--accent-color);
+  font-weight: 600;
+}
