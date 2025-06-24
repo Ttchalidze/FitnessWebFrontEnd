@@ -5,7 +5,7 @@ import { useAuth } from "../auth/AuthContext";
 
 const VideoIframe = () => {
   const token = useAuth();
-  const { workout, setWorkout } = useState();
+  const [ workout, setWorkout ] = useState();
   let params = useParams();
   useEffect(() => {
     const callWorkout = async () => {
