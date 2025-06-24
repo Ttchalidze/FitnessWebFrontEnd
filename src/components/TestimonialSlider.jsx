@@ -1,4 +1,3 @@
-// src/components/TestimonialSlider.jsx
 import { useEffect } from "react";
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";

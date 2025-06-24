@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation } from "react-router-dom";
 import "../styles/Navbar.css";
+
 export default function Navbar() {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Listen for scroll only on homepage
+  // Scroll effect only on home page
   useEffect(() => {
     if (location.pathname === "/") {
       const handleScroll = () => {
@@ -15,11 +17,15 @@ export default function Navbar() {
       window.addEventListener("scroll", handleScroll);
       return () => window.removeEventListener("scroll", handleScroll);
     } else {
-      setScrolled(false); // Disable scroll effect on other pages
+      setScrolled(false);
     }
   }, [location]);
 
-  // Check if we're on home
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location]);
+
   const isHome = location.pathname === "/";
 
   return (
@@ -30,14 +36,43 @@ export default function Navbar() {
     >
       <div className="navbar-container">
         <div className="logo">
-          <Link to="/">FitnessPro</Link>{" "}
+          <Link to="/">Fitness Pro</Link>
         </div>
-        <nav className="nav-links">
-          <Link to="/">Home</Link>
-          <Link to="/workouts">Workouts</Link>
-          <Link to="/account">My Workouts</Link>
-          <Link to="/login">Logout</Link>
+
+        <nav className={`nav-links ${isMobileMenuOpen ? "mobile-menu" : ""}`}>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/workouts">Workouts</Link>
+            </li>
+            <li>
+              <Link to="/account">My Workouts</Link>
+            </li>
+            <li>
+              <Link to="/login">Logout</Link>
+            </li>
+          </ul>
         </nav>
+
+        {/* Hamburger icon */}
+        <div
+          className="hamburger"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              setIsMobileMenuOpen(!isMobileMenuOpen);
+            }
+          }}
+        >
+          <div className={`bar ${isMobileMenuOpen ? "open" : ""}`}></div>
+          <div className={`bar ${isMobileMenuOpen ? "open" : ""}`}></div>
+          <div className={`bar ${isMobileMenuOpen ? "open" : ""}`}></div>
+        </div>
       </div>
     </header>
   );
