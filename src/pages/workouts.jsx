@@ -5,10 +5,12 @@ import { useAuth } from "../auth/AuthContext";
 
 const Workoutvideo = () => {
   const token = useAuth();
-  const { workout, setWorkout } = useState();
+  const [workout, setWorkout] = useState();
+  console.log(workout);
+  const [error, setError] = useState();
+
   let params = useParams();
   useEffect(() => {
-    console.log("useEffect");
     const callWorkout = async () => {
       const result = await getWorkoutsById(params.id);
       setWorkout(result);
@@ -16,23 +18,29 @@ const Workoutvideo = () => {
     callWorkout();
   }, []);
   const handleAddWorkout = async () => {
+    if (!token) {
+      setError("You must be logged in to add a workout.");
+      return;
+    }
     try {
       await addWorkout(params.id, token);
     } catch (error) {
       console.error("Error adding workout:", error);
+      setError("Failed to add workout.");
     }
   };
-
+  if (!workout) return <div>loading: {error}</div>;
+  if (error) return <div>Error: {error}</div>;
   return (
     <div>
       <div>
-        {workout?.videoUrl ? (
+        {workout?.video ? (
           <div>
             <h2>chest workout</h2>
             <iframe
               width="560"
               height="315"
-              src={workout.videoUrl}
+              src={workout.video}
               title={workout.title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
