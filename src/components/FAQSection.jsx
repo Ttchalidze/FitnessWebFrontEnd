@@ -1,5 +1,3 @@
-// src/components/FAQSection.jsx
-
 import { useState } from "react";
 import "../styles/faq.css";
 
