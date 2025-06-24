@@ -5,10 +5,10 @@ import legs from "../imgSource/legs.png";
 import shoulders from "../imgSource/shoulders.png";
 import { useNavigate } from "react-router";
 
-export const WorkoutImages = () => {
+export const WorkoutMenu = () => {
   let navigate = useNavigate();
   const onImgClick = (id) => {
-    navigate(`/workouts:${id}`);
+    navigate(`/workouts/${id}`);
   };
   return (
     <div>

@@ -1,5 +1,5 @@
 {
-  "name": "foobar",
+  "name": "fitnessweb",
   "type": "module",
   "scripts": {
     "dev": "vite",

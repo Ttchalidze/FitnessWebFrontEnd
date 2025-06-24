@@ -3,7 +3,7 @@ import { deleteWorkout, getWorkoutsByUserId } from "../api/workout";
 import { useParams } from "react-router";
 import { useAuth } from "../auth/AuthContext";
 
-const VideoIframeUser = () => {
+const myworkouts = () => {
   const token = useAuth();
   const { workout, setWorkout } = useState();
 
@@ -27,24 +27,30 @@ const VideoIframeUser = () => {
   return (
     <div>
       <div>
-        <h2>chest workout</h2>
-        <iframe
-          width="560"
-          height="315"
-          src={workout.videoUrl}
-          title={workout.title}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-        ></iframe>
-        <div>
-          <h2>description of workouts</h2>
+        {workout?.videoUrl ? (
           <div>
-            <p>{workout.description}</p>s
+            <h2>chest workout</h2>
+            <iframe
+              width="560"
+              height="315"
+              src={workout.videoUrl}
+              title={workout.title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+            <div>
+              <h2>description of workouts</h2>
+              <div>
+                <p>{workout.description}</p>
+              </div>
+              <button onClick={handleDeleteWorkout}>add workOut</button>
+            </div>
           </div>
-        </div>
-        <button onClick={handleDeleteWorkout}>add workOut</button>
+        ) : (
+          <p>Loading..</p>
+        )}
       </div>
     </div>
   );

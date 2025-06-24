@@ -4,6 +4,8 @@ import { Login } from "./pages/loginpage";
 import { Register } from "./pages/registerPage";
 import HomePage from "./layout/homepage";
 import Workout from "./pages/workouts";
+import { WorkoutMenu } from "./pages/workoutmenu";
+import { Myworkouts } from "./pages/myworkouts";
 
 export default function App() {
   return (
@@ -13,6 +15,8 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/workouts/:id" element={<Workout />} />
+        <Route path="/menu" element={<WorkoutMenu />} />
+        <Route path="/myworkouts" element={<Myworkouts />} />
       </Route>
     </Routes>
   );
