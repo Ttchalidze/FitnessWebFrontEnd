@@ -16,7 +16,7 @@ export default function App() {
         <Route path="login" element={<Login />} />
         <Route path="workouts" element={<WorkoutImages />} />
         <Route path="workouts/:id" element={<Workout />} />
-        <Route path="myworkouts" element={<MyWorkouts />} />
+        <Route path="/myworkouts" element={<MyWorkouts />} />
       </Route>
     </Routes>
   );
