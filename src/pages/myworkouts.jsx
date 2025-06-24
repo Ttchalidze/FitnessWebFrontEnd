@@ -1,53 +1,68 @@
 import { useState, useEffect } from "react";
 import { deleteWorkout, getWorkoutsByUserId } from "../api/workout";
-import { useParams } from "react-router";
 import { useAuth } from "../auth/AuthContext";
 
-const VideoIframeUser = () => {
-  const token = useAuth();
-  const { workout, setWorkout } = useState();
+const Myworkouts = () => {
+  const { token } = useAuth();
+  const [workouts, setWorkouts] = useState();
+  const [error, setError] = useState();
 
-  let params = useParams();
   useEffect(() => {
-    const callWorkout = async () => {
-      const result = await getWorkoutsByUserId(params.id);
-      setWorkout(result);
-    };
-    callWorkout();
-    workout.description;
-  }, []);
-  const handleDeleteWorkout = async () => {
+    if (token) {
+      const callWorkout = async () => {
+        try {
+          const result = await getWorkoutsByUserId(token);
+          setWorkouts(result);
+        } catch (err) {
+          setError(err.message);
+        }
+      };
+      callWorkout();
+    }
+  }, [token]);
+
+  const handleDeleteWorkout = async (id) => {
     try {
-      await deleteWorkout(params.id, token);
+      await deleteWorkout(id, token);
+      setWorkouts(workouts.filter((w) => w.id !== id));
     } catch (error) {
       console.error("Error deleting workout:", error);
+      setError("Failed to delete workout.");
     }
   };
+
+  if (error) return <div className="container">Error: {error}</div>;
 
   return (
     <div>
       <div>
-        <h2>chest workout</h2>
-        <iframe
-          width="560"
-          height="315"
-          src={workout.videoUrl}
-          title={workout.title}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowfullscreen
-        ></iframe>
-        <div>
-          <h2>description of workouts</h2>
+        {workouts?.video ? (
           <div>
-            <p>{workout.description}</p>s
+            <h2>chest workout</h2>
+            <iframe
+              width="560"
+              height="315"
+              src={workouts.video}
+              title={workouts.title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+            <div>
+              <h2>description of workouts</h2>
+              <div>
+                <p>{workouts.description}</p>
+              </div>
+              <button onClick={handleDeleteWorkout}>add workOut</button>
+            </div>
           </div>
-        </div>
-        <button onClick={handleDeleteWorkout}>add workOut</button>
+        ) : (
+          <p>Loading..</p>
+        )}
       </div>
     </div>
   );
 };
 
-export default VideoIframeUser;
+export default Myworkouts;

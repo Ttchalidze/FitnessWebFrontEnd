@@ -10,7 +10,7 @@ export const Register = () => {
   const [error, setError] = useState("");
 
   // all constants below are used to handle input changes when registering user
-  const onFistNameChange = (event) => {
+  const onFirstNameChange = (event) => {
     let value = event.target.value;
     setFirstName(value);
   };
@@ -51,27 +51,46 @@ export const Register = () => {
     }
   };
   return (
-    <div className="">
-      <h1 className=""> </h1>
+    <div className="container">
+      <h1>Register</h1>
       {error && <p className="error">{error}</p>}
-      <div className="">
-        <label htmlFor="fistName">First Name</label>
-        <inout type="text" id="fistName" onChange={onFistNameChange} />
-        <labele htmlFor="lastName">Last name</labele>
-        <input type="text" id="lastName" onChange={onLastNameChange} />
-        <lable htmlFor="registerEmail">Email</lable>
-        <input type="email" id="registerEmail" onChange={onEmailChange} />
+      <form onSubmit={onRegisterEvent}>
+        <label htmlFor="firstName">First Name</label>
+        <input
+          type="text"
+          id="firstName"
+          onChange={onFirstNameChange}
+          value={firstName}
+        />
+        <label htmlFor="lastName">Last name</label>
+        <input
+          type="text"
+          id="lastName"
+          onChange={onLastNameChange}
+          value={lastName}
+        />
+        <label htmlFor="registerEmail">Email</label>
+        <input
+          type="email"
+          id="registerEmail"
+          onChange={onEmailChange}
+          value={email}
+        />
         <label htmlFor="registerPassword">Password</label>
         <input
           type="password"
           id="registerPassword"
           onChange={onPasswordChange}
+          value={password}
         />
-        {/**inbuilt function similar to above function for  event handler */}
-        <label htmlFor="age">Selet Age</label>
-        <select id="age" onChange={(event) => setAge(event.target.value)}>
+        <label htmlFor="age">Select Age</label>
+        <select
+          id="age"
+          value={age}
+          onChange={(event) => setAge(event.target.value)}
+        >
           <option value="" disabled>
-            --Sex--
+            --Select Age--
           </option>
           {agePicker.map((number) => (
             <option key={number} value={number}>
@@ -79,12 +98,10 @@ export const Register = () => {
             </option>
           ))}
         </select>
-        <button onClick={onRegisterEvent} className="">
-          Register
-        </button>
-      </div>
-      <p className="">
-        Alreadyt have an account? <a href="/login">Login here</a>
+        <button type="submit">Register</button>
+      </form>
+      <p>
+        Already have an account? <a href="/login">Login here</a>
       </p>
     </div>
   );

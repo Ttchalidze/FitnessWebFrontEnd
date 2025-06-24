@@ -29,10 +29,10 @@ export const Login = () => {
     }
   };
   return (
-    <div className="">
-      <h1 className="">Log in to your account</h1>
+    <div className="container">
+      <h1>Log in to your account</h1>
       {error && <p className="error">{error}</p>}
-      <div className="">
+      <form onSubmit={onLoginEvent}>
         <label htmlFor="email">Email</label>
         <input type="text" id="email" onChange={onEmailChange} value={email} />
         <label htmlFor="password">Password</label>
@@ -42,13 +42,11 @@ export const Login = () => {
           onChange={onPasswordchange}
           value={password}
         />
-        <button className="" onClick={onLoginEvent}>
-          Login
-        </button>
-        <p className="">
-          Need an account? <a href="/register">Register</a>
-        </p>
-      </div>
+        <button type="submit">Login</button>
+      </form>
+      <p>
+        Need an account? <a href="/register">Register</a>
+      </p>
     </div>
   );
 };
