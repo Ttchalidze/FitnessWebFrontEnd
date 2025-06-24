@@ -5,7 +5,7 @@ import { Register } from "./pages/registerPage";
 import HomePage from "./layout/homepage";
 import Workout from "./pages/workouts";
 import { WorkoutMenu } from "./pages/workoutmenu";
-import { Myworkouts } from "./pages/myworkouts";
+import Myworkouts from "./pages/myworkouts";
 
 export default function App() {
   return (

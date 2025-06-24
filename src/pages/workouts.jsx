@@ -3,7 +3,7 @@ import { addWorkout, getWorkoutsById } from "../api/workout";
 import { useParams } from "react-router";
 import { useAuth } from "../auth/AuthContext";
 
-const VideoIframe = () => {
+const Workoutvideo = () => {
   const token = useAuth();
   const { workout, setWorkout } = useState();
   let params = useParams();
@@ -55,4 +55,4 @@ const VideoIframe = () => {
   );
 };
 
-export default VideoIframe;
+export default Workoutvideo;

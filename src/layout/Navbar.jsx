@@ -35,7 +35,7 @@ export default function Navbar() {
         <nav className="nav-links">
           <Link to="/">Home</Link>
           <Link to="/menu">Workouts</Link>
-          <Link to="/account">My Workouts</Link>
+          <Link to="/myworkouts">My Workouts</Link>
           <Link to="/login">Logout</Link>
         </nav>
       </div>

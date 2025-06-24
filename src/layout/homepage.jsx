@@ -24,7 +24,7 @@ export default function Home() {
         <div className="hero-content" data-aos="zoom-in">
           <h1>Track Your Fitness Journey</h1>
           <p>Build routines. Track progress. Stay motivated.</p>
-          <a href="/workouts" className="cta-button">
+          <a href="/menu" className="cta-button">
             Explore Workouts
           </a>
         </div>
