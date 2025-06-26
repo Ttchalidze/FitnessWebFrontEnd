@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import './login.css';
+import "./login.css";
 
 import { useAuth } from "./AuthContext";
 
@@ -38,7 +38,7 @@ export default function Login() {
           onChange={onEmailChange}
           value={email}
         />
-        <Link to="/register">Need an account? Register here.</Link>
+
         <label htmlFor="password" className="LoginPassword">
           Password
         </label>
