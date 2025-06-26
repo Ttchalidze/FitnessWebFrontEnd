@@ -20,7 +20,7 @@ export const WorkoutImages = () => {
           <img
             src={chest}
             alt="Chest"
-            onClick={() => onImgClick("5")}
+            onClick={() => onImgClick("1")}
             className="muscle-img"
           />
         </div>
@@ -29,7 +29,7 @@ export const WorkoutImages = () => {
           <img
             src={arms}
             alt="Arms"
-            onClick={() => onImgClick("1")}
+            onClick={() => onImgClick("2")}
             className="muscle-img"
           />
         </div>
@@ -38,7 +38,7 @@ export const WorkoutImages = () => {
           <img
             src={back}
             alt="Back"
-            onClick={() => onImgClick("2")}
+            onClick={() => onImgClick("3")}
             className="muscle-img"
           />
         </div>
@@ -47,7 +47,7 @@ export const WorkoutImages = () => {
           <img
             src={legs}
             alt="Legs"
-            onClick={() => onImgClick("3")}
+            onClick={() => onImgClick("4")}
             className="muscle-img"
           />
         </div>
@@ -56,7 +56,7 @@ export const WorkoutImages = () => {
           <img
             src={shoulders}
             alt="Shoulders"
-            onClick={() => onImgClick("4")}
+            onClick={() => onImgClick("5")}
             className="muscle-img"
           />
         </div>
