@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { deleteWorkout, getWorkoutsByUserId } from "../api/workout";
 import { useAuth } from "../auth/AuthContext";
+import "../styles/myworkouts.css";
 
 const Myworkouts = () => {
   const { token } = useAuth();
@@ -34,34 +35,40 @@ const Myworkouts = () => {
   if (error) return <div className="container">Error: {error}</div>;
 
   return (
-    <div>
-      <div>
-        {workouts?.map((workout) => (
-          <div key={workout.id}>
-            <h2>chest workout</h2>
-            <iframe
-              width="560"
-              height="315"
-              src={workout.video}
-              title={workout.title}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
-            <div>
-              <h2>description of workouts</h2>
-              <div>
+    <div className="my-workouts-page">
+      <h1>My Saved Workouts</h1>
+      {workouts && workouts.length > 0 ? (
+        <div className="my-workouts-grid">
+          {workouts.map((workout) => (
+            <div key={workout.id} className="my-workout-card">
+              <iframe
+                className="my-workout-video"
+                src={workout.video}
+                title={workout.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
+              <div className="my-workout-content">
+                <h2>{workout.title || "Workout"}</h2>
                 <p>{workout.description}</p>
+                <button
+                  onClick={() => handleDeleteWorkout(workout.id)}
+                  className="delete-workout-btn"
+                >
+                  Delete Workout
+                </button>
               </div>
-              <button onClick={() => handleDeleteWorkout(workout.id)}>
-                delete workout
-              </button>
             </div>
-          </div>
-        ))}
-        {workouts.length === 0 && <p>Please add workouts</p>}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <p className="no-workouts-message">
+          You haven`t added any workouts yet. Go to the{" "}
+          <a href="/workouts">Workouts</a> page to add some!
+        </p>
+      )}
     </div>
   );
 };

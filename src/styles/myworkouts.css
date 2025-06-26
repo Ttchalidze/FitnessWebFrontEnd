@@ -1,0 +1,108 @@
+.my-workouts-page {
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+  background: linear-gradient(110deg, #f0f2f5 0%, #e9ecef 100%);
+  min-height: 100vh;
+}
+
+.my-workouts-page h1 {
+  font-size: 2.8rem;
+  margin-bottom: 3rem;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: #2c2e33;
+  text-align: center;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
+}
+
+.my-workouts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.my-workout-card {
+  background: #ffffff;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 35px rgba(45, 48, 53, 0.1),
+    0 2px 8px rgba(45, 48, 53, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+    box-shadow 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.my-workout-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 45px rgba(45, 48, 53, 0.15),
+    0 4px 12px rgba(230, 57, 70, 0.1);
+}
+
+.my-workout-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.my-workout-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.my-workout-content h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #2c2e33;
+  margin-bottom: 1rem;
+}
+
+.my-workout-content p {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.6;
+  flex-grow: 1;
+  margin-bottom: 1.5rem;
+}
+
+.delete-workout-btn {
+  padding: 0.7rem 1.4rem;
+  background-color: #e63946;
+  color: white;
+  border: none;
+  border-radius: 0.7rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.delete-workout-btn:hover {
+  background-color: #c42d3a;
+  transform: scale(1.05);
+}
+
+.no-workouts-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 4rem;
+}
+
+@media (max-width: 768px) {
+  .my-workouts-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .my-workouts-page h1 {
+    font-size: 2.2rem;
+  }
+}
