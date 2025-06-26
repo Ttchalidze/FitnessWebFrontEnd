@@ -4,6 +4,7 @@ import back from "../imgSource/back.png";
 import legs from "../imgSource/legs.png";
 import shoulders from "../imgSource/shoulders.png";
 import { useNavigate } from "react-router";
+import "../styles/workouts.css";
 
 export const WorkoutImages = () => {
   let navigate = useNavigate();
@@ -11,38 +12,57 @@ export const WorkoutImages = () => {
     navigate(`/workouts/${id}`);
   };
   return (
-    <div>
-      <h1>Select your workouts</h1>
-      <div>
-        <h2>chest</h2>
-        <div>
-          <img src={chest} onClick={() => onImgClick("5")} />
+    <div className="workouts">
+      <h1>Select Your Workouts</h1>
+      <div className="muscle-groups">
+        <div className="muscle-card">
+          <h2>Chest</h2>
+          <img
+            src={chest}
+            alt="Chest"
+            onClick={() => onImgClick("5")}
+            className="muscle-img"
+          />
         </div>
-      </div>
-      <div>
-        <h2>arms</h2>
-        <div>
-          <img src={arms} onClick={() => onImgClick("1")} />
+        <div className="muscle-card">
+          <h2>Arms</h2>
+          <img
+            src={arms}
+            alt="Arms"
+            onClick={() => onImgClick("1")}
+            className="muscle-img"
+          />
         </div>
-      </div>
-      <div>
-        <h2>back</h2>
-        <div>
-          <img src={back} onClick={() => onImgClick("2")} />
+        <div className="muscle-card">
+          <h2>Back</h2>
+          <img
+            src={back}
+            alt="Back"
+            onClick={() => onImgClick("2")}
+            className="muscle-img"
+          />
         </div>
-      </div>
-      <div>
-        <h2>legs</h2>
-        <div>
-          <img src={legs} onClick={() => onImgClick("3")} />
+        <div className="muscle-card">
+          <h2>Legs</h2>
+          <img
+            src={legs}
+            alt="Legs"
+            onClick={() => onImgClick("3")}
+            className="muscle-img"
+          />
         </div>
-        <div>
-          <h2>shoulders</h2>
-          <div>
-            <img src={shoulders} onClick={() => onImgClick("4")} />
-          </div>
+        <div className="muscle-card">
+          <h2>Shoulders</h2>
+          <img
+            src={shoulders}
+            alt="Shoulders"
+            onClick={() => onImgClick("4")}
+            className="muscle-img"
+          />
         </div>
       </div>
     </div>
   );
 };
+
+export default WorkoutImages;
