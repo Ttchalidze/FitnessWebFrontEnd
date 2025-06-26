@@ -26,7 +26,7 @@ export const getWorkoutsById = async (id) => {
 export const getWorkoutsByUserId = async (token) => {
   try {
     const config = { headers: { Authorization: `Bearer ${token}` } };
-    const response = await axiosClient.get(`/workouts/user`, config);
+    const response = await axiosClient.get(`/myworkouts`, config);
     return response.data;
   } catch (error) {
     console.error("error fetching workouts by user ID", error);
@@ -38,7 +38,11 @@ export const getWorkoutsByUserId = async (token) => {
 export const addWorkout = async (id, token) => {
   try {
     const config = { headers: { Authorization: `Bearer ${token}` } };
-    const response = await axiosClient.post(`/workouts/${id}`, null, config);
+    const response = await axiosClient.post(
+      `/myworkouts`,
+      { workout_id: id },
+      config
+    );
     return response.data;
   } catch (error) {
     console.error("error adding workout", error);
@@ -50,7 +54,7 @@ export const addWorkout = async (id, token) => {
 export const deleteWorkout = async (id, token) => {
   try {
     const config = { headers: { Authorization: `Bearer ${token}` } };
-    const response = await axiosClient.delete(`/workouts/${id}`, config);
+    const response = await axiosClient.delete(`/myworkouts/${id}`, config);
     return response.data;
   } catch (error) {
     console.error("error deleting workout", error);

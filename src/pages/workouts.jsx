@@ -4,39 +4,49 @@ import { useParams } from "react-router";
 import { useAuth } from "../auth/AuthContext";
 
 const Workoutvideo = () => {
-  const token = useAuth();
-  const [workout, setWorkout] = useState();
-  console.log(workout);
-  const [error, setError] = useState();
+  const { token } = useAuth();
+  const [workout, setWorkout] = useState(null);
+  const [success, setSuccess] = useState(false);
 
-  let params = useParams();
+  const params = useParams();
+
   useEffect(() => {
     const callWorkout = async () => {
-      const result = await getWorkoutsById(params.id);
-      setWorkout(result);
+      try {
+        const result = await getWorkoutsById(params.id);
+        setWorkout(result);
+      } catch (error) {
+        console.error("Failed to load workout:", error);
+      }
     };
     callWorkout();
-  }, []);
+  }, [params.id]);
+
   const handleAddWorkout = async () => {
     if (!token) {
-      setError("You must be logged in to add a workout.");
+      console.error("You must be loged in ");
       return;
     }
     try {
       await addWorkout(params.id, token);
+      setSuccess(true);
+
+      setTimeout(() => setSuccess(false), 3000);
     } catch (error) {
       console.error("Error adding workout:", error);
-      setError("Failed to add workout.");
+      setSuccess(false);
     }
   };
-  if (!workout) return <div>loading: {error}</div>;
-  if (error) return <div>Error: {error}</div>;
+
+  if (!workout) return <div>Loading... </div>;
+
   return (
     <div>
+      {success && <div>Workout added successfully!</div>}
       <div>
         {workout?.video ? (
           <div>
-            <h2>chest workout</h2>
+            <h2>{workout.title || "Workout Video"}</h2>
             <iframe
               width="560"
               height="315"
@@ -45,18 +55,18 @@ const Workoutvideo = () => {
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
             <div>
-              <h2>description of workouts</h2>
+              <h2>Description of Workouts</h2>
               <div>
                 <p>{workout.description}</p>
               </div>
-              <button onClick={handleAddWorkout}>add workOut</button>
+              <button onClick={handleAddWorkout}>Add Workout</button>
             </div>
           </div>
         ) : (
-          <p>Loading..</p>
+          <p>Loading video...</p>
         )}
       </div>
     </div>
