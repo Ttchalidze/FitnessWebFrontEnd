@@ -7,12 +7,7 @@ const faqData = [
   {
     question: "Is FitnessPro free to use?",
     answer:
-      "Yes! FitnessPro is free to get started. You can track workouts, wellness, and progress.",
-  },
-  {
-    question: "Can I track my wellness too?",
-    answer:
-      "Yes. You can log sleep, water intake, mood, and wellness daily to stay consistent.",
+      "Yes! FitnessPro is free to get started. You can track workouts and progress at no cost.",
   },
   {
     question: "Do I need special equipment?",
@@ -23,6 +18,16 @@ const faqData = [
     question: "Is my data secure?",
     answer:
       "Absolutely. We take your privacy seriously and securely store your progress data.",
+  },
+  {
+    question: "Can I use FitnessPro on my phone?",
+    answer:
+      "Yes! FitnessPro is fully responsive. You can log your workouts and track progress on any device.",
+  },
+  {
+    question: "Can I create my own custom workouts?",
+    answer:
+      "Definitely! You can build your own routines, choose your favorite exercises, and set personal goals.",
   },
 ];
 

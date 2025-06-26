@@ -1,4 +1,4 @@
-.login-bg {
+.register-bg {
   min-height: 100vh;
   background: linear-gradient(110deg, #e9ecef 0%, #f6f7fa 100%);
   display: flex;
@@ -7,10 +7,10 @@
   padding: 2.5rem 1rem;
 }
 
-.login-container {
+.register-container {
   width: 100%;
-  max-width: 400px;
-  background: rgba(255, 255, 255, 0.76);
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.82);
   border-radius: 1.6rem;
   box-shadow: 0 8px 32px rgba(44, 46, 49, 0.13),
     0 1.5px 8px rgba(44, 46, 49, 0.09);
@@ -21,7 +21,7 @@
   align-items: center;
 }
 
-.login-container h1 {
+.register-container h1 {
   font-size: 2.1rem;
   font-family: "Poppins", Arial, sans-serif;
   font-weight: 900;
@@ -31,21 +31,22 @@
   letter-spacing: 0.03em;
 }
 
-.login-form {
+.register-form {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
 
-.login-form label {
+.register-form label {
   font-weight: 700;
   margin-bottom: 0.25rem;
   color: #232529;
   letter-spacing: 0.01em;
 }
 
-.login-form input {
+.register-form input,
+.register-form select {
   padding: 0.85rem 1rem;
   border: 1.5px solid #e0e1e4;
   border-radius: 0.85rem;
@@ -54,12 +55,13 @@
   background: #f6f7fa;
   transition: border 0.18s;
 }
-.login-form input:focus {
+.register-form input:focus,
+.register-form select:focus {
   border: 1.5px solid var(--accent-color, #e63946);
   background: #fff;
 }
 
-.LoginButton {
+.registerButton {
   padding: 0.8rem 0;
   width: 100%;
   background: var(--accent-color, #e63946);
@@ -75,37 +77,45 @@
   box-shadow: 0 3px 12px rgba(230, 57, 70, 0.07);
   transition: background 0.18s, box-shadow 0.18s, transform 0.12s;
 }
-.LoginButton:hover,
-.LoginButton:focus {
+.registerButton:hover,
+.registerButton:focus {
   background: #be2d3d;
   box-shadow: 0 6px 20px rgba(230, 57, 70, 0.12);
   transform: translateY(-1.5px) scale(1.03);
 }
 
-.RegisterRedirect {
+.registerP {
   margin-top: 1.4rem;
   font-size: 0.98rem;
   text-align: center;
 }
 
-.RegisterRedirect a {
+.registerP a {
   color: var(--accent-color, #e63946);
   font-weight: 700;
   margin-left: 0.3rem;
   text-decoration: none;
   transition: color 0.15s;
 }
-.RegisterRedirect a:hover {
+.registerP a:hover {
   color: #be2d3d;
   text-decoration: underline;
 }
 
+.register-error {
+  color: #e63946;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  font-size: 1.02rem;
+}
+
 @media (max-width: 540px) {
-  .login-container {
+  .register-container {
     max-width: 97vw;
     padding: 1.3rem 0.4rem;
   }
-  .login-bg {
+  .register-bg {
     padding: 1.2rem 0.2rem;
   }
 }

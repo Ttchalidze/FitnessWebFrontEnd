@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
 import Layout from "./layout/Layout";
-import { Login } from "./pages/loginpage";
-import { Register } from "./pages/registerPage";
+import LoginPage from "./pages/loginpage";
+import Register from "./pages/registerPage"; // default export!
 import HomePage from "./layout/homepage";
 import Workout from "./pages/workouts";
 import { WorkoutImages } from "./pages/workoutImg";
@@ -13,10 +13,10 @@ export default function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
         <Route path="register" element={<Register />} />
-        <Route path="login" element={<Login />} />
+        <Route path="login" element={<LoginPage />} />
         <Route path="workouts" element={<WorkoutImages />} />
         <Route path="workouts/:id" element={<Workout />} />
-        <Route path="/myworkouts" element={<MyWorkouts />} />
+        <Route path="myworkouts" element={<MyWorkouts />} />
       </Route>
     </Routes>
   );

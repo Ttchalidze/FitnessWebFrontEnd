@@ -1,60 +1,66 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { useAuth } from "../auth/AuthContext";
+import "../styles/register.css";
 
-import { useAuth } from "./AuthContext";
-
-//A form that allows users to register for a new account
-export const RegisterPage = () => {
+export const Register = () => {
   const { register } = useAuth();
-  const [fistname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onEmailChange = (event) => {
-    let val = event.target.value;
-    setEmail(val);
+  const onEmailChange = (event) => setEmail(event.target.value);
+  const onPasswordChange = (event) => setPassword(event.target.value);
+  const onFirstnameChange = (event) => setFirstName(event.target.value);
+  const onLastNameChange = (event) => setLastName(event.target.value);
+
+  const onRegister = async (e) => {
+    e.preventDefault();
+    await register({ firstName, lastName, email, password });
   };
-  const onPasswordChange = (event) => {
-    let val = event.target.value;
-    setPassword(val);
-  };
-  const onFirstnameChange = (event) => {
-    let val = event.target.value;
-    setFirstName(val);
-  };
-  const onLastNameChange = (event) => {
-    let val = event.target.value;
-    setLastName(val);
-  };
-  const onRegister = async () => {
-    const results = await register({ fistname, lastname, email, password });
-    console.log(results);
-  };
+
   return (
-    <div className="registerDiv">
-      <h1 className="registerh1">Register for an account</h1>
-      <div className="registerDiv2">
-        <label htmlFor="firstName">First Name</label>
-        <input type="string" id="firstName" onChange={onFirstnameChange} />
-        <label htmlFor="lastName">Last name </label>
-        <input type="string" id="lastName" onChange={onLastNameChange} />
-        <label htmlFor="registerEmail">Email</label>
-        <input type="email" id="registerEmail" onChange={onEmailChange} />
-        <label htmlFor="registerPassword">Password</label>
-        <input
-          type="password"
-          id="registerPassword"
-          onChange={onPasswordChange}
-        />
-        <button onClick={onRegister} className="registerButton">
-          <a href="/home" className="cta-button"></a>
-        </button>
+    <div className="register-bg">
+      <div className="register-container">
+        <h1>Register for an account</h1>
+        <form className="register-form" onSubmit={onRegister}>
+          <label htmlFor="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            onChange={onFirstnameChange}
+            required
+          />
+          <label htmlFor="lastName">Last name</label>
+          <input
+            type="text"
+            id="lastName"
+            onChange={onLastNameChange}
+            required
+          />
+          <label htmlFor="registerEmail">Email</label>
+          <input
+            type="email"
+            id="registerEmail"
+            onChange={onEmailChange}
+            required
+          />
+          <label htmlFor="registerPassword">Password</label>
+          <input
+            type="password"
+            id="registerPassword"
+            onChange={onPasswordChange}
+            required
+          />
+          <button type="submit" className="registerButton">
+            Register
+          </button>
+        </form>
+        <p className="registerP">
+          Already have an account? <Link to="/login">Login here</Link>
+        </p>
       </div>
-      <p className="registerP">
-        Already have an account?
-        <Link to="login"></Link>
-      </p>
     </div>
   );
 };
