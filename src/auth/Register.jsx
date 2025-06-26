@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 
 import { useAuth } from "./AuthContext";
 
@@ -10,7 +10,6 @@ export const RegisterPage = () => {
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
   const onEmailChange = (event) => {
     let val = event.target.value;
@@ -28,10 +27,9 @@ export const RegisterPage = () => {
     let val = event.target.value;
     setLastName(val);
   };
-  const onLoginEvent = async () => {
+  const onRegister = async () => {
     const results = await register({ fistname, lastname, email, password });
     console.log(results);
-    navigate("/");
   };
   return (
     <div className="registerDiv">
@@ -49,8 +47,8 @@ export const RegisterPage = () => {
           id="registerPassword"
           onChange={onPasswordChange}
         />
-        <button onClick={onLoginEvent} className="registerButton">
-          Register
+        <button onClick={onRegister} className="registerButton">
+          register
         </button>
       </div>
       <p className="registerP">
