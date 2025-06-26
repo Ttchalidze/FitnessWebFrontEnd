@@ -48,7 +48,7 @@ export const RegisterPage = () => {
           onChange={onPasswordChange}
         />
         <button onClick={onRegister} className="registerButton">
-          register
+          <a href="/home" className="cta-button"></a>
         </button>
       </div>
       <p className="registerP">
