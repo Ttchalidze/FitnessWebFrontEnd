@@ -4,39 +4,59 @@ import { Link, useNavigate } from "react-router";
 import { useAuth } from "./AuthContext";
 
 //A form that allows users to register for a new account
-export default function Register() {
+export const RegisterPage = () => {
   const { register } = useAuth();
+  const [fistname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const [error, setError] = useState(null);
-
-  const onRegister = async (formData) => {
-    const username = formData.get("username");
-    const password = formData.get("password");
-    try {
-      await register({ username, password });
-      navigate("/");
-    } catch (e) {
-      setError(e.message);
-    }
+  const onEmailChange = (event) => {
+    let val = event.target.value;
+    setEmail(val);
   };
-
+  const onPasswordChange = (event) => {
+    let val = event.target.value;
+    setPassword(val);
+  };
+  const onFirstnameChange = (event) => {
+    let val = event.target.value;
+    setFirstName(val);
+  };
+  const onLastNameChange = (event) => {
+    let val = event.target.value;
+    setLastName(val);
+  };
+  const onLoginEvent = async () => {
+    const results = await register({ fistname, lastname, email, password });
+    console.log(results);
+    navigate("/");
+  };
   return (
-    <>
-      <h1>Register for an account</h1>
-      <form action={onRegister}>
-        <label>
-          Username
-          <input type="text" name="username" />
-        </label>
-        <label>
-          Password
-          <input type="password" name="password" required />
-        </label>
-        <button>Register</button>
-        {error && <output>{error}</output>}
-      </form>
-      <Link to="/login">Already have an account? Log in here.</Link>
-    </>
+    <div className="registerDiv">
+      <h1 className="registerh1">Register for an account</h1>
+      <div className="registerDiv2">
+        <label htmlFor="firstName">First Name</label>
+        <input type="string" id="firstName" onChange={onFirstnameChange} />
+        <label htmlFor="lastName">Last name </label>
+        <input type="string" id="lastName" onChange={onLastNameChange} />
+        <label htmlFor="registerEmail">Email</label>
+        <input type="email" id="registerEmail" onChange={onEmailChange} />
+        <label htmlFor="registerPassword">Password</label>
+        <input
+          type="password"
+          id="registerPassword"
+          onChange={onPasswordChange}
+        />
+        <button onClick={onLoginEvent} className="registerButton">
+          Register
+        </button>
+      </div>
+      <p className="registerP">
+        Already have an account?
+        <Link to="login"></Link>
+      </p>
+    </div>
   );
-}
+};

@@ -4,19 +4,18 @@ import { useAuth } from "../auth/AuthContext";
 
 const Myworkouts = () => {
   const { token } = useAuth();
-  const [workouts, setWorkouts] = useState();
+  const [workouts, setWorkouts] = useState([]);
   const [error, setError] = useState();
-
+  const callWorkout = async () => {
+    try {
+      const result = await getWorkoutsByUserId(token);
+      setWorkouts(result);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
   useEffect(() => {
     if (token) {
-      const callWorkout = async () => {
-        try {
-          const result = await getWorkoutsByUserId(token);
-          setWorkouts(result);
-        } catch (err) {
-          setError(err.message);
-        }
-      };
       callWorkout();
     }
   }, [token]);
@@ -25,6 +24,7 @@ const Myworkouts = () => {
     try {
       await deleteWorkout(id, token);
       setWorkouts(workouts.filter((w) => w.id !== id));
+      callWorkout();
     } catch (error) {
       console.error("Error deleting workout:", error);
       setError("Failed to delete workout.");
@@ -36,14 +36,14 @@ const Myworkouts = () => {
   return (
     <div>
       <div>
-        {workouts?.video ? (
-          <div>
+        {workouts?.map((workout) => (
+          <div key={workout.id}>
             <h2>chest workout</h2>
             <iframe
               width="560"
               height="315"
-              src={workouts.video}
-              title={workouts.title}
+              src={workout.video}
+              title={workout.title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
@@ -52,14 +52,15 @@ const Myworkouts = () => {
             <div>
               <h2>description of workouts</h2>
               <div>
-                <p>{workouts.description}</p>
+                <p>{workout.description}</p>
               </div>
-              <button onClick={handleDeleteWorkout}>add workOut</button>
+              <button onClick={() => handleDeleteWorkout(workout.id)}>
+                delete workout
+              </button>
             </div>
           </div>
-        ) : (
-          <p>Loading..</p>
-        )}
+        ))}
+        {workouts.length === 0 && <p>Please add workouts</p>}
       </div>
     </div>
   );

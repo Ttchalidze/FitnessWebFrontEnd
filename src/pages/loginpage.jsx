@@ -1,52 +1,65 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router";
+
 import { useAuth } from "../auth/AuthContext";
 
+// A form that allows users to log into an existing account.
 export const Login = () => {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const onEmailChange = (event) => {
-    let value = event.target.value;
-    setEmail(value);
+    let val = event.target.value;
+    setEmail(val);
   };
-  const onPasswordchange = (event) => {
-    let value = event.target.value;
-    setPassword(value);
+  const onPasswordChange = (event) => {
+    let val = event.target.value;
+    setPassword(val);
   };
   const onLoginEvent = async () => {
-    setError("");
-    if (!email || !password) {
-      setError("Please fill all fields.");
-      return;
-    }
-    const result = await login({ email, password });
-    if (result.error) {
-      setError(result.error.message);
-    } else {
-      console.log("Login Successful!", result);
+    const results = await login({ email, password });
+    if (results) {
+      navigate("/");
     }
   };
   return (
-    <div className="container">
-      <h1>Log in to your account</h1>
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={onLoginEvent}>
-        <label htmlFor="email">Email</label>
-        <input type="text" id="email" onChange={onEmailChange} value={email} />
-        <label htmlFor="password">Password</label>
+    <div className="">
+      <h1 className="">Log in to your account</h1>
+      <div>
+        <label htmlFor="email" className="LoginEmail">
+          Email
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="inputEmail"
+          onChange={onEmailChange}
+          value={email}
+        />
+        <label htmlFor="password" className="LoginPassword">
+          Password
+        </label>
         <input
           type="password"
           id="password"
-          onChange={onPasswordchange}
+          name="inputPAssword"
+          onChange={onPasswordChange}
           value={password}
         />
-        <button type="submit">Login</button>
-      </form>
-      <p>
-        Need an account? <a href="/register">Register</a>
-      </p>
+        <button
+          onClick={onLoginEvent}
+          className="LoginButton
+        "
+        >
+          Login
+        </button>
+        <p className="RegisterRedirect">
+          Need an account?
+          <Link to="/register">Need an account? Register here.</Link>
+        </p>
+      </div>
     </div>
   );
 };
